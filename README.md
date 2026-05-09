@@ -16,7 +16,7 @@
 ## ⚙️ 02 - FreeRTOS 内核代码解析
 读 FreeRTOS 内核主要代码，深度剖析任务调度、队列、定时器及内存管理机制。
 
-* [Freertos移植层(port_c)核心代码解析](./freertos内核代码解析/Freertos移植层（port_c）核心代码解.../index.html)
+* [Freertos移植层(port_c)核心代码解析](./freertos内核代码解析/Freertos移植层（port_c）核心代码解析/index.html)
 * [freertos核心代码之task模块(上)](./freertos内核代码解析/freertos核心代码之task模块（上）/index.html)
 * [freertos之task模块(中)](./freertos内核代码解析/freertos之task模块（中）/index.html)
 * [freertos之task模块(下)](./freertos内核代码解析/freertos之task模块（下）/index.html)
