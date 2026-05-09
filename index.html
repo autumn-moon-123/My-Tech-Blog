@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>硬核技术专栏 | FreeRTOS & Transformer</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #0c0c1d 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 3rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container { max-width: 800px; width: 100%; }
+
+        /* 标题区域 */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #7b2ff7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        .hero .subtitle {
+            font-size: 1rem;
+            color: #8892b0;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .hero .badge-row {
+            margin-top: 1.2rem;
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .badge-rtos { background: rgba(0,212,255,0.15); color: #00d4ff; border: 1px solid rgba(0,212,255,0.3); }
+        .badge-ai  { background: rgba(123,47,247,0.15); color: #b388ff; border: 1px solid rgba(123,47,247,0.3); }
+        .badge-src { background: rgba(255,215,0,0.12); color: #ffd700; border: 1px solid rgba(255,215,0,0.25); }
+
+        /* 专栏区域 */
+        .section { margin-bottom: 2.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid rgba(255,255,255,0.06);
+        }
+        .section-header .icon { font-size: 1.6rem; }
+        .section-header h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ccd6f6;
+            letter-spacing: 1px;
+        }
+        .section-desc {
+            font-size: 0.9rem;
+            color: #8892b0;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* 导航卡片 */
+        .card-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+        .card-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #ccd6f6;
+            font-weight: 500;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.25s ease;
+            backdrop-filter: blur(2px);
+        }
+        .card-list li a:hover {
+            background: rgba(0,212,255,0.08);
+            border-color: rgba(0,212,255,0.25);
+            transform: translateX(6px);
+            box-shadow: 0 4px 20px rgba(0,212,255,0.1);
+        }
+        .card-list li a .link-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+        /* 源码仓库 */
+        .repo-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+        .repo-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #ccd6f6;
+            font-weight: 600;
+            background: rgba(255,215,0,0.05);
+            border: 1px solid rgba(255,215,0,0.15);
+            transition: all 0.25s ease;
+        }
+        .repo-list li a:hover {
+            background: rgba(255,215,0,0.12);
+            border-color: rgba(255,215,0,0.35);
+            transform: translateX(6px);
+        }
+        .repo-desc {
+            font-weight: 400;
+            font-size: 0.85rem;
+            color: #8892b0;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        /* 底栏 */
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: #5a6a8c;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+        .footer a { color: #7b8bb3; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 标题区域 -->
+        <div class="hero">
+            <h1>💻 硬核技术专栏</h1>
+            <p class="subtitle">
+                专注于嵌入式RTOS实时操作系统内核源码深度剖析、<br>深度学习Transformer模型推理全流程拆解与工程落地。
+            </p>
+            <div class="badge-row">
+                <span class="badge badge-rtos">⚙️ FreeRTOS 内核</span>
+                <span class="badge badge-ai">🤖 Transformer 推理</span>
+                <span class="badge badge-src">📦 源码开放</span>
+            </div>
+        </div>
+
+        <!-- 01 - Transformer 详解 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="icon">🤖</span>
+                <h2>01 · Transformer 详解</h2>
+            </div>
+            <p class="section-desc">从零拆解Transformer推理全流程，覆盖核心逻辑实现与GPU部署落地。</p>
+            <ul class="card-list">
+                <li><a href="./Transformer详解/Transformer的推理流程详解__从零实现一个Transformer/index.html"><span class="link-icon">📄</span>Transformer的推理流程详解_从零实现一个Transformer</a></li>
+                <li><a href="./Transformer详解/Transformer的推理流程详解__从零实现一个Transformer（二）/index.html"><span class="link-icon">📄</span>Transformer的推理流程详解_从零实现一个Transformer(二)</a></li>
+                <li><a href="./Transformer详解/将Transformer部署在GPU上/index.html"><span class="link-icon">📄</span>将Transformer部署在GPU上</a></li>
+            </ul>
+        </div>
+
+        <!-- 02 - FreeRTOS 内核代码深度解析 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="icon">⚙️</span>
+                <h2>02 · FreeRTOS 内核代码深度解析</h2>
+            </div>
+            <p class="section-desc">逐行拆解FreeRTOS内核核心源码，深度剖析任务调度、内存管理、队列通信、定时器与防死锁机制。</p>
+            <ul class="card-list">
+                <li><a href="./freertos内核代码解析/Freertos移植层（port_c）核心代码解析/index.html"><span class="link-icon">📄</span>Freertos移植层(port_c)核心代码解析</a></li>
+                <li><a href="./freertos内核代码解析/freertos核心代码之task模块（上）/index.html"><span class="link-icon">📄</span>freertos核心代码之task模块(上)</a></li>
+                <li><a href="./freertos内核代码解析/freertos之task模块（中）/index.html"><span class="link-icon">📄</span>freertos之task模块(中)</a></li>
+                <li><a href="./freertos内核代码解析/freertos之task模块（下）/index.html"><span class="link-icon">📄</span>freertos之task模块(下)</a></li>
+                <li><a href="./freertos内核代码解析/freertos之queue模块（上）/index.html"><span class="link-icon">📄</span>freertos之queue模块(上)</a></li>
+                <li><a href="./freertos内核代码解析/freertos之queue模块（下）/index.html"><span class="link-icon">📄</span>freertos之queue模块(下)</a></li>
+                <li><a href="./freertos内核代码解析/freertos之timer模块/index.html"><span class="link-icon">📄</span>freertos之timer模块</a></li>
+                <li><a href="./freertos内核代码解析/Freertos_之heap管理/index.html"><span class="link-icon">📄</span>Freertos_之heap管理</a></li>
+                <li><a href="./freertos内核代码解析/freerots之list实现/index.html"><span class="link-icon">📄</span>freerots之list实现</a></li>
+                <li><a href="./freertos内核代码解析/品一品freertos的防死锁机制/index.html"><span class="link-icon">📄</span>品一品freertos的防死锁机制</a></li>
+            </ul>
+        </div>
+
+        <!-- 03 - 我的FreeRTOS 手写实现 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="icon">🛠️</span>
+                <h2>03 · 我的FreeRTOS 手写实现</h2>
+            </div>
+            <p class="section-desc">从零手写极简FreeRTOS，覆盖内核核心逻辑到外设驱动的完整实现过程。</p>
+            <ul class="card-list">
+                <li><a href="./我的freertos/自己写一个简单的freertos（核心代码部分）/index.html"><span class="link-icon">📄</span>自己写一个简单的freertos(核心代码部分)</a></li>
+                <li><a href="./我的freertos/自己写一个简单的freertos（外部驱动部分）/index.html"><span class="link-icon">📄</span>自己写一个简单的freertos(外部驱动部分)</a></li>
+            </ul>
+        </div>
+
+        <!-- 相关源码仓库 -->
+        <div class="section">
+            <div class="section-header">
+                <span class="icon">🗂️</span>
+                <h2>相关源码仓库</h2>
+            </div>
+            <p class="section-desc">别只读文章，源码跑起来印象更深刻！</p>
+            <ul class="repo-list">
+                <li><a href="https://github.com/autumn-moon-123/myRtos/tree/main/myrtos_template" target="_blank">⭐ myRtos (手写 FreeRTOS 极简内核) <span class="repo-desc">对应 “03 · 我的FreeRTOS 手写实现”</span></a></li>
+                <li><a href="https://github.com/autumn-moon-123/self_transformer_qwen2" target="_blank">⭐ self_transformer_qwen2 (手写 Transformer 推理) <span class="repo-desc">对应 “01 · Transformer 详解”</span></a></li>
+                <li><a href="https://github.com/FreeRTOS/FreeRTOS-Kernel/tree/V10.4.4" target="_blank">📖 FreeRTOS V10.4.4 内核源码（官方标准版） <span class="repo-desc">逐行分析版本 · task/queue/heap/port/timer</span></a></li>
+            </ul>
+        </div>
+
+        <!-- 底栏 -->
+        <div class="footer">
+            <p>Powered by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> | 嵌入式 &amp; AI 技术沉淀</p>
+        </div>
+
+    </div>
+</body>
+</html>
