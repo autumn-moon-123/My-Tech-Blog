@@ -33,7 +33,7 @@
 自己写一个简单的 FreeRTOS，从核心代码到外部驱动的实现过程。
 
 * [自己写一个简单的freertos(核心代码部分)](./我的freertos/自己写一个简单的freertos（核心代.../index.html)
-* [自己写一个简单的freertos(外部驱动部分)](./我的freertos/自己写一个简单的freertos（外部驱.../index.html)
+* [自己写一个简单的freertos(外部驱动部分)](./我的freertos/自己写一个简单的freertos（外部驱动部分）/index.html)
 
 ---
 *Powered by GitHub Pages*
