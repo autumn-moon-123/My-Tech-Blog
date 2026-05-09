@@ -8,7 +8,7 @@
 详细解析一个 Transformer 的推理过程。
 
 * [Transformer的推理流程详解_从零实现一个Transformer](./Transformer详解/Transformer的推理流程详解__从零实现一个Transformer/index.html)
-* [Transformer的推理流程详解_从零实现一个Transformer(二)](./Transformer详解/Transformer的推理流程详解__从零实现一个Transformer/index.html)
+* [Transformer的推理流程详解_从零实现一个Transformer(二)](./Transformer详解/Transformer的推理流程详解__从零实现一个Transformer（二）/index.html)
 * [将Transformer部署在GPU上](./Transformer详解/将Transformer部署在GPU上/index.html)
 
 ---
