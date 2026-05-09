@@ -36,4 +36,14 @@
 * [自己写一个简单的freertos(外部驱动部分)](./我的freertos/自己写一个简单的freertos（外部驱动部分）/index.html)
 
 ---
+---
+
+## 🗂️ 相关源码仓库
+> **别只读文章，源码跑起来印象更深刻！** 这里有我手写的极简实现与对应的官方标准版源码链接。
+
+- ⭐ [myRtos (手写 FreeRTOS 极简内核)](https://github.com/autumn-moon-123/myRtos/tree/main/myrtos_template) —— 对应 **“03 - 我的FreeRTOS 手写实现”** 专栏
+- ⭐ [self_transformer_qwen2 (手写 Transformer 推理)](https://github.com/autumn-moon-123/self_transformer_qwen2) —— 对应 **“01 - Transformer 详解”** 专栏
+- 📖 [FreeRTOS V10.4.4 内核源码（官方标准版）](https://github.com/FreeRTOS/FreeRTOS-Kernel/tree/V10.4.4) —— 我逐行分析的就是这个版本，包含 task、queue、heap、port、timer 等核心模块
+
+---
 *Powered by GitHub Pages*
